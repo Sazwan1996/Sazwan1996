@@ -1,0 +1,45 @@
+import pandas as pd
+
+# Load the dataset
+# Note: Replace 'your_dataset.csv' with the path to your actual dataset file
+dataset_path = 'your_dataset.csv'
+df = pd.read_csv(dataset_path)
+
+# Display the first few rows of the dataset
+print("First few rows of the dataset:")
+print(df.head())
+
+# Display basic information about the dataset
+print("\nBasic information about the dataset:")
+print(df.info())
+
+# Display basic statistics about the dataset
+print("\nBasic statistics about the dataset:")
+print(df.describe())
+
+# Check for missing values
+print("\nMissing values in the dataset:")
+print(df.isnull().sum())
+
+# Drop rows with missing values (if any)
+df_cleaned = df.dropna()
+print("\nDataset after dropping rows with missing values:")
+print(df_cleaned.info())
+
+# Perform some basic analysis - Example: Calculate the average of a column
+# Note: Replace 'column_name' with the actual name of the column you want to analyze
+column_name = 'your_column_name'
+average_value = df_cleaned[column_name].mean()
+print(f"\nAverage value of '{column_name}': {average_value}")
+
+# Group data by a specific column and calculate aggregate statistics
+# Note: Replace 'group_column' with the actual name of the column you want to group by
+group_column = 'your_group_column'
+grouped_data = df_cleaned.groupby(group_column)[column_name].agg(['mean', 'sum', 'count'])
+print(f"\nGrouped data by '{group_column}':")
+print(grouped_data)
+
+# Save the cleaned dataset to a new CSV file
+cleaned_dataset_path = 'cleaned_dataset.csv'
+df_cleaned.to_csv(cleaned_dataset_path, index=False)
+print(f"\nCleaned dataset saved to '{cleaned_dataset_path}'")
